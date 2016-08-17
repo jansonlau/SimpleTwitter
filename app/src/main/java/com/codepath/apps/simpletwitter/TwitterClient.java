@@ -1,4 +1,7 @@
-package com.codepath.apps.restclienttemplate;
+// 1. Gets homeTimeline --> Used in TimelineActivity
+// Define REST client
+
+package com.codepath.apps.simpletwitter;
 
 import android.content.Context;
 
@@ -32,15 +35,25 @@ public class TwitterClient extends OAuthBaseClient {
 		super(context, REST_API_CLASS, REST_URL, REST_CONSUMER_KEY, REST_CONSUMER_SECRET, REST_CALLBACK_URL);
 	}
 
-	// CHANGE THIS
-	// DEFINE METHODS for different API endpoints here
-	public void getInterestingnessList(AsyncHttpResponseHandler handler) {
-		String apiUrl = getApiUrl("?nojsoncallback=1&method=flickr.interestingness.getList");
-		// Can specify query string params directly or through RequestParams.
+	// HomeTimeline - Gets the home timeline
+	// GET statuses/home_timeline.json
+	// count = 25
+	// since_id = 1
+	public void getHomeTimeline(AsyncHttpResponseHandler handler) {
+		// Configure URL
+		String apiUrl = getApiUrl("statuses/home_timeline.json");
+
+		// Specify string params using RequestParams
 		RequestParams params = new RequestParams();
-		params.put("format", "json");
-		client.get(apiUrl, params, handler);
+		params.put("count", 25);
+		params.put("since_id", 1);
+
+		// Execute request
+		getClient().get(apiUrl, params, handler);
 	}
+
+	// COMPOSE TWEET
+
 
 	/* 1. Define the endpoint URL with getApiUrl and pass a relative path to the endpoint
 	 * 	  i.e getApiUrl("statuses/home_timeline.json");
