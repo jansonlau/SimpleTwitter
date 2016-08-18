@@ -1,3 +1,5 @@
+// Set's the adapter and populates general listView
+
 package com.codepath.apps.simpletwitter.fragments;
 
 import android.os.Bundle;
